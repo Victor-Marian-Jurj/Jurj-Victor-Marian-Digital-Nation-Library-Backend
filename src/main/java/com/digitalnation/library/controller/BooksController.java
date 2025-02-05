@@ -8,7 +8,6 @@ import com.digitalnation.library.model.CreateBookRequest;
 import com.digitalnation.library.model.UpdateBookRequest;
 import com.digitalnation.library.service.BooksService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -31,7 +30,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("books")
 @RequiredArgsConstructor
-@Slf4j
 @CrossOrigin(origins = "*")
 public class BooksController {
 
@@ -41,9 +39,6 @@ public class BooksController {
 
     @PostMapping
     public void createBook(@RequestBody CreateBookRequest requestBody, Authentication authentication) {
-        log.info("createBook");
-        log.info("authentication = {}", authentication);
-        log.info("authentication.getName = {}", authentication.getName());
         Book newBook = new Book();
         newBook.setAuthors(requestBody.getAuthors());
         newBook.setIsbn(requestBody.getIsbn());
@@ -70,9 +65,6 @@ public class BooksController {
 
     @GetMapping
     public ResponseEntity<BookResponse> readAllBooks(Authentication authentication) {
-        log.info("readAllBooks");
-        log.info("authentication = {}", authentication);
-        log.info("authentication.getName = {}", authentication.getName());
         List<Book> books = booksService.getAllBooks();
         List<BookDto> bookDtoList = books.stream().map(this::convertToDTO).collect(Collectors.toList());
         BookResponse responseBody = new BookResponse(bookDtoList);
@@ -82,9 +74,6 @@ public class BooksController {
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteBookById(@PathVariable Long id, Authentication authentication) {
         try {
-            log.info("deleteBook");
-            log.info("authentication = {}", authentication);
-            log.info("authentication.getName = {}", authentication.getName());
             booksService.deleteBookbyId(id);
             return ResponseEntity.ok().build();
         } catch (EmptyResultDataAccessException exception) {
@@ -95,9 +84,6 @@ public class BooksController {
     @PatchMapping("{id}")
     public ResponseEntity<Book> updateBook(@RequestBody UpdateBookRequest requestBody, @PathVariable Long id, Authentication authentication) {
         try {
-            log.info("updateBook");
-            log.info("authentication = {}", authentication);
-            log.info("authentication.getName = {}", authentication.getName());
             Book responseBody = booksService.updateBookById(id);
             responseBody.setAuthors(requestBody.getAuthors());
             responseBody.setTitle(requestBody.getTitle());
