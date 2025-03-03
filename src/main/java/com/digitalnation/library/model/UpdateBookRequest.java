@@ -1,7 +1,5 @@
 package com.digitalnation.library.model;
 
-import java.time.LocalDate;
-
 public class UpdateBookRequest {
 
     private String isbn;

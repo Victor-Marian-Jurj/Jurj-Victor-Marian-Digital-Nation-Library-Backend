@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 public class BookDto {
 
-    private Long id;
+    private Long bookId;
 
     private String isbn;
 
