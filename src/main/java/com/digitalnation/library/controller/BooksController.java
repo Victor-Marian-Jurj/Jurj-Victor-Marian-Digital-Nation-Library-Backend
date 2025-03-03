@@ -40,8 +40,8 @@ public class BooksController {
     @PostMapping
     public void createBook(@RequestBody CreateBookRequest requestBody, Authentication authentication) {
         Book newBook = new Book();
-        newBook.setAuthors(requestBody.getAuthors());
         newBook.setIsbn(requestBody.getIsbn());
+        newBook.setAuthors(requestBody.getAuthors());
         newBook.setTitle(requestBody.getTitle());
         newBook.setYear(requestBody.getYear());
         newBook.setTypes(requestBody.getTypes());
@@ -85,9 +85,9 @@ public class BooksController {
     public ResponseEntity<Book> updateBook(@RequestBody UpdateBookRequest requestBody, @PathVariable Long id, Authentication authentication) {
         try {
             Book responseBody = booksService.updateBookById(id);
+            responseBody.setIsbn(requestBody.getIsbn());
             responseBody.setAuthors(requestBody.getAuthors());
             responseBody.setTitle(requestBody.getTitle());
-            responseBody.setIsbn(requestBody.getIsbn());
             responseBody.setDescription(requestBody.getDescription());
             responseBody.setYear(requestBody.getYear());
             responseBody.setTypes(requestBody.getTypes());

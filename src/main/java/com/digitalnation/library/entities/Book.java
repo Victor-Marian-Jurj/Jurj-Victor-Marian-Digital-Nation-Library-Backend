@@ -13,8 +13,8 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "book_id")
+    private Long bookId;
 
     @Column(name = "isbn")
     private String isbn;
@@ -46,8 +46,8 @@ public class Book {
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
+    public Long getBookId() {
+        return bookId;
     }
 
     public String getIsbn() {
