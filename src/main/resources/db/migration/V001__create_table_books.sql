@@ -1,6 +1,6 @@
 create table books (
-	id serial primary key,
-	isbn varchar(20) unique not null,
+	book_id serial primary key,
+	isbn varchar(10) unique not null,
 	authors varchar(100) not null,
 	title varchar(100) unique not null,
 	types varchar(20) not null,
